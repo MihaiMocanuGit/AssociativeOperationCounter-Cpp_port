@@ -1,7 +1,8 @@
 #include <iostream>
+#include "generator.h"
 
 int main()
 {
-    std::cout << "Hello\n";
+    Generator<3, 3*3> generator;
     return 0;
 }
