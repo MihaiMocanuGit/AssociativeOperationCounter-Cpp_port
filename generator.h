@@ -34,7 +34,7 @@ public:
          */
         while (m_currentDigit >= 0 and m_arrayProjection[m_currentDigit] == CARDINAL_SET - 1)
         {
-            for (int i = 0; i < LENGHT_GROUP; ++i)
+            for (int i = m_currentDigit; i < LENGHT_GROUP; ++i)
                 m_arrayProjection[i] = 0;
             m_currentDigit--;
         }
