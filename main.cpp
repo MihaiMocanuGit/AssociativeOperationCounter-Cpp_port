@@ -6,6 +6,7 @@
 
 int main()
 {
+    //Change the number below to generate semigroups on different sets
     constexpr int CARDINAL_SET = 4;
 
     Validator<CARDINAL_SET> validator;

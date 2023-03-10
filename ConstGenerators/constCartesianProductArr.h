@@ -1,6 +1,10 @@
 #ifndef CONST_CARTESIAN_PRODUCT_ARR_H
 #define CONST_CARTESIAN_PRODUCT_ARR_H
 
+/*
+ * Class used to generate at compile time the cartesian product of a set with itself <REPEAT> times
+ * so AxAxA....xA = A^REPEAT;
+ */
 template <std::size_t CARDINAL_SET, std::size_t REPEAT>
 class ConstCartesianProductArr
 {

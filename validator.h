@@ -17,13 +17,20 @@ private:
      */
     static constexpr ConstCartesianProductArr PROD_GROUPS = ConstCartesianProductArr<CARDINAL_SET, 3>();
 
+    //Class used to continuously generate operations
     Generator<CARDINAL_SET, CARDINAL_SET_SQ> m_generator = Generator<CARDINAL_SET, CARDINAL_SET_SQ>();
+
+    //Class used to generate all isomorphic structures (semigroups) to a given operation.
     Isomorphism<CARDINAL_SET> m_isomorphism = Isomorphism<CARDINAL_SET>();
 
+    //Class used for printing the semigroups in file
     OperationPrintingBuffer<CARDINAL_SET> m_printer = OperationPrintingBuffer<CARDINAL_SET>();
-    //int m_noOfAssociativeOperations = 0;
 
 
+
+    /*
+     * Checks if the current operation stored in the Generator is associative
+     */
     bool m_isAssociative()
     {
         /*
@@ -55,6 +62,9 @@ private:
         return true;
     }
 
+    /*
+     * Using the Generator, it searches through operations until it finds one that is associative
+     */
     bool m_generateNextValid()
     {
         bool hasNotFinished = m_generator.generateNext();
@@ -67,6 +77,11 @@ private:
 public:
     Validator() = default;
 
+    /*
+     * This function starts the whole program, the main idea is that using m_generateNextValid(), it finds associative
+     * operations. After finding one, the method m_isomorphism.compute_isomorphisms() will generate all unique semigroup
+     * isomorphisms, which will be printed into the text file.
+     */
     void startGeneration()
     {
         while (m_generateNextValid())

@@ -5,7 +5,9 @@
 #ifndef CONSTBIJECTIONARR_H
 #define CONSTBIJECTIONARR_H
 
-
+/*
+ * Class used to generate at compile time all bijective functions on a set of size = CARDINAL_SET
+ */
 template <std::size_t CARDINAL_SET>
 class ConstBijectionsArr
 {

@@ -12,7 +12,7 @@ template <std::size_t CARDINAL_SET>
 class Isomorphism
 {
 private:
-    // computing all bijective functions as permutations
+    // computing at compile time all bijective functions as permutations
     static constexpr ConstBijectionsArr BIJ_FUNCTIONS = ConstBijectionsArr<CARDINAL_SET>();
 
     /*
@@ -21,10 +21,12 @@ private:
      */
     static constexpr ConstCartesianProductArr PROD_GROUPS = ConstCartesianProductArr<CARDINAL_SET, 2>();
 
+    //in this set we store the unique keys that characterize a semigroup
     std::set<int> m_associativeKeys;
 
     static constexpr int CARDINAL_SET_SQ = CARDINAL_SET * CARDINAL_SET;
 
+    //generating unique keys that characterize a semigroup
     int m_computeKey(int operationArr[CARDINAL_SET_SQ])
     {
         /*
@@ -72,6 +74,9 @@ public:
 
     static constexpr int MAX_ISOMORPHISMS = BIJ_FUNCTIONS.NO_BIJECTIONS;
 
+    /*
+     * Given an operation, it computes into isomorphicOperations[][] all unique isomorphisms
+     */
     void compute_isomorphisms(int operationArray[CARDINAL_SET_SQ],
                               int isomorphicOperations[MAX_ISOMORPHISMS][CARDINAL_SET_SQ], int &rNoIsomorphisms)
     {
@@ -83,12 +88,16 @@ public:
 
         //otherwise compute all isomorphisms to that operation
 
+        //we go through every bijective function
         for (int bijIndex = 0; bijIndex < MAX_ISOMORPHISMS; ++bijIndex)
         {
             const int *bijFunction = BIJ_FUNCTIONS.FUNCTIONS[bijIndex];
             int *newOperation = isomorphicOperations[rNoIsomorphisms];
+
+            //computes new operation given a bijective function and an old operation
             m_computeNewOperationArray(bijFunction, operationArray, newOperation);
 
+            //checking for uniqueness in set
             int newKey = m_computeKey(newOperation);
             if (!m_associativeKeys.contains(newKey))
             {
