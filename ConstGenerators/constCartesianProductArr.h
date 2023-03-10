@@ -17,32 +17,32 @@ private:
     }
 
 public:
-    static consexpr int NO_PRODUCTS = COMPUTE_NO_PRODUCTS();
-    int FUNCTIONS[NO_PRODUCTS][REPEAT];
+    static constexpr int NO_PRODUCTS = COMPUTE_NO_PRODUCTS();
+    int PRODUCTS[NO_PRODUCTS][REPEAT];
 
-    constexpr ConstCartesianProductArr() : FUNCTIONS()
+    constexpr ConstCartesianProductArr() : PRODUCTS()
     {
         for (int functionIndex = 0; functionIndex < NO_PRODUCTS; ++functionIndex)
             for (int i = 0; i < REPEAT; ++i)
-                FUNCTIONS[functionIndex][i] = 0;
+                PRODUCTS[functionIndex][i] = 0;
 
         for (int functI = 1; functI < NO_PRODUCTS; ++functI)
         {
             for (int i = 0; i < REPEAT; ++i)
             {
-                FUNCTIONS[functI][i] = FUNCTIONS[functI - 1][i];
+                PRODUCTS[functI][i] = PRODUCTS[functI - 1][i];
             }
             //The same algorithm use in generator.h, generateNext()
             int currentDigit = REPEAT - 1;
-            while (currentDigit >= 0 and FUNCTIONS[functI][currentDigit] == CARDINAL_SET - 1)
+            while (currentDigit >= 0 and PRODUCTS[functI][currentDigit] == CARDINAL_SET - 1)
             {
                 for (int i = currentDigit; i < REPEAT; ++i)
-                    FUNCTIONS[functI][i] = 0;
+                    PRODUCTS[functI][i] = 0;
                 currentDigit--;
             }
 
             // we increase the value of the "number" by one
-            FUNCTIONS[functI][currentDigit]++;
+            PRODUCTS[functI][currentDigit]++;
 
             // and we move the current_digit pointer back to the end (in the case we actually had to carry at least a one)
             currentDigit = REPEAT - 1;
@@ -59,7 +59,7 @@ public:
             std::cout << functionIndex << '\n';
             for (int i = 0; i < REPEAT; ++i)
             {
-                std::cout << '\t' << FUNCTIONS[functionIndex][i] << '\t';
+                std::cout << '\t' << PRODUCTS[functionIndex][i] << '\t';
             }
             std::cout << '\n';
         }

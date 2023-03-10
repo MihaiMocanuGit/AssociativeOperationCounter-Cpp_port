@@ -75,7 +75,7 @@ public:
             std::cout << functionIndex << '\n';
             for (int i = 0; i < CARDINAL_SET; ++i)
             {
-                std::cout << '\t' << FUNCTIONS[functionIndex][i] << '\t';
+                std::cout << '\t' << PRODUCTS[functionIndex][i] << '\t';
             }
             std::cout << '\n';
         }
