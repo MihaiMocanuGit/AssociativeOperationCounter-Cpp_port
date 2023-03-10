@@ -6,6 +6,8 @@
 #include "ConstGenerators/constBijectionArr.h"
 #include "ConstGenerators/constCartesianProductArr.h"
 #include "Utils/utils.h"
+
+
 template <std::size_t CARDINAL_SET>
 class Isomorphism
 {
@@ -21,9 +23,9 @@ private:
 
     std::set<int> m_associativeKeys;
 
-    static constexpr int ARR_LENGHT = CARDINAL_SET * CARDINAL_SET;
+    static constexpr int CARDINAL_SET_SQ = CARDINAL_SET * CARDINAL_SET;
 
-    int m_computeKey(int operationArr[ARR_LENGHT])
+    int m_computeKey(int operationArr[CARDINAL_SET_SQ])
     {
         /*
          * the key will actually be the conversion of the number represented in nparray from base <self.__cardinal> into
@@ -31,12 +33,68 @@ private:
          */
 
         int sum = 0;
-        for (int i = 0; i < ARR_LENGHT; ++i)
+        for (int i = 0; i < CARDINAL_SET_SQ; ++i)
             sum += operationArr[i] * Utils::powInt(CARDINAL_SET, i);
         return sum;
     }
+
+    /*
+     * Given a bijective function and an operation, it computes an isomorphic structure
+     * (in our case isomorphic semi-group)
+     */
+    void m_computeNewOperationArray(int bijFunction[CARDINAL_SET], int oldOperationArray[CARDINAL_SET_SQ],
+                                    int newOperationArray[CARDINAL_SET_SQ])
+    {
+        //TODO: Make sure that this is really useless
+        //for (int i = 0; i < CARDINAL_SET * CARDINAL_SET; ++i)
+        //    newOperationArray[i] = -1;
+
+        /*
+         * We go through every way of grouping x and y and compute f(xy) = f(x) * f(y)
+         * oldOperationArray is used to compute xy
+         * newOperationArray is used to store f(x) * f(y)
+         */
+        for (int groupIndex = 0; groupIndex < PROD_FUNCTIONS.NO_PRODUCTS; ++groupIndex)
+        {
+            int x = PROD_FUNCTIONS.FUNCTIONS[groupIndex][0];
+            int y = PROD_FUNCTIONS.FUNCTIONS[groupIndex][1];
+            int xy = Utils::getElementAtIJ(x,y, oldOperationArray,CARDINAL_SET);
+
+            int f_x = bijFunction[x];
+            int f_y = bijFunction[y];
+            int f_xy = bijFunction[xy];
+
+            Utils::setElementAtIJ(f_x, f_y, f_xy, newOperationArray, CARDINAL_SET);
+        }
+    }
 public:
     Isomorphism() = default;
+
+    void compute_isomorphisms(int operationArray[CARDINAL_SET_SQ],
+                              int isomorphicOperations[BIJ_FUNCTIONS.NO_BIJECTIONS][CARDINAL_SET_SQ], int &rNoIsomorphisms)
+    {
+        int key = m_computeKey(operationArray);
+        rNoIsomorphisms = 0;
+        //if the given operation was already computed do nothing,
+        if (m_associativeKeys.contains(key))
+            return;
+
+        //otherwise compute all isomorphisms to that operation
+
+        for (int bijIndex = 0; bijIndex < BIJ_FUNCTIONS.NO_BIJECTIONS; ++bijIndex)
+        {
+            int *bijFunction = BIJ_FUNCTIONS.FUNCTIONS[bijIndex];
+            int *newOperation = isomorphicOperations[rNoIsomorphisms];
+            m_computeNewOperationArray(bijFunction, operationArray, newOperation);
+
+            int newKey = m_computeKey(newOperation);
+            if (!m_associativeKeys.contains(newKey))
+            {
+                rNoIsomorphisms++;
+            }
+        }
+
+    }
 
 };
 
