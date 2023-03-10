@@ -92,6 +92,7 @@ public:
             int newKey = m_computeKey(newOperation);
             if (!m_associativeKeys.contains(newKey))
             {
+                m_associativeKeys.insert(newKey);
                 rNoIsomorphisms++;
             }
         }
