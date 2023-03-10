@@ -28,7 +28,7 @@ private:
     int m_computeKey(int operationArr[CARDINAL_SET_SQ])
     {
         /*
-         * the key will actually be the conversion of the number represented in nparray from base <self.__cardinal> into
+         * the key will actually be the conversion of the number represented in operationArr from base <CARDINAL_SET> into
          * base 10
          */
 
@@ -40,7 +40,7 @@ private:
 
     /*
      * Given a bijective function and an operation, it computes an isomorphic structure
-     * (in our case isomorphic semi-group)
+     * (in our case isomorphic semigroup)
      */
     void m_computeNewOperationArray(const int bijFunction[CARDINAL_SET], int oldOperationArray[CARDINAL_SET_SQ],
                                     int newOperationArray[CARDINAL_SET_SQ])
@@ -103,4 +103,4 @@ public:
 
 
 
-#endif //SOMORPHISM_H
+#endif //ISOMORPHISM_H
