@@ -1,12 +1,14 @@
 #include <iostream>
 
-#include "generator.h"
-#include "isomorphism.h"
+#include "validator.h"
+
+
 
 int main()
 {
-    Generator<3, 3*3> generator;
-    Isomorphism<5> isomorphism;
+    constexpr int CARDINAL_SET = 2;
+    Validator<CARDINAL_SET> validator;
+    validator.startGeneration();
 
     return 0;
 }
