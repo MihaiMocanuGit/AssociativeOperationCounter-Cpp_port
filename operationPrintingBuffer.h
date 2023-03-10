@@ -12,7 +12,7 @@ template <std::size_t CARDINAL_SET>
 class OperationPrintingBuffer
 {
 private:
-    std::string outputFile = "output_";
+    std::string outputFile = "../output_";
     std::ofstream m_outputStream;
 
     static constexpr int CARDINAL_SET_SQ = CARDINAL_SET * CARDINAL_SET;
@@ -23,7 +23,7 @@ private:
 public:
     OperationPrintingBuffer()
     {
-        outputFile += std::to_string(CARDINAL_SET));
+        outputFile += std::to_string(CARDINAL_SET);
         outputFile += ".txt";
 
         m_outputStream.open(outputFile );
@@ -38,7 +38,7 @@ public:
         {
             for (int j = 0; j < CARDINAL_SET; ++j)
             {
-                int element = Utils::getElementAtIJ(i,h, operationArray, CARDINAL_SET);
+                int element = Utils::getElementAtIJ(i, j, operationArray, CARDINAL_SET);
                 element += 1;
 
                 std::string completeElement = "a";

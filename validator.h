@@ -31,7 +31,7 @@ private:
          * We use PROD_GROUPS to go through all possible groups of <CARDINAL_SET> elements placed into 3 blocks
          * the first space representing x, the second y and the third z
          */
-        int *operationArray = m_generator.getPtrArray();
+        const int *operationArray = m_generator.getPtrArray();
 
         for (int groupIndex = 0; groupIndex < PROD_GROUPS.NO_PRODUCTS; ++groupIndex)
         {

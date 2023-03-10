@@ -8,6 +8,11 @@ int Utils::powInt(int base, int power)
     return result;
 }
 
+int Utils::getElementAtIJ(int i, int j, const int arr[], int numberColumns)
+{
+    return arr[i * numberColumns + j];
+}
+
 int Utils::getElementAtIJ(int i, int j, int arr[], int numberColumns)
 {
     return arr[i * numberColumns + j];

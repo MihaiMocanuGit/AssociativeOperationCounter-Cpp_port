@@ -57,7 +57,7 @@ public:
 
     int* getPtrArray()
     {
-        return &m_arrayProjection;
+        return m_arrayProjection;
     }
 };
 

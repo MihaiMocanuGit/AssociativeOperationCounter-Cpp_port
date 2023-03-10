@@ -19,7 +19,7 @@ private:
      * # we calculate this beforehand, it will be used in computeOperationArray. We are actually computing all the ways
      * we can write x*y using elements from the set (for computing f(xy) = f(x) * f(y))
      */
-    static constexpr ConstCartesianProductArr PROD_FUNCTIONS = ConstCartesianProductArr<CARDINAL_SET, 2>();
+    static constexpr ConstCartesianProductArr PROD_GROUPS = ConstCartesianProductArr<CARDINAL_SET, 2>();
 
     std::set<int> m_associativeKeys;
 
@@ -42,7 +42,7 @@ private:
      * Given a bijective function and an operation, it computes an isomorphic structure
      * (in our case isomorphic semi-group)
      */
-    void m_computeNewOperationArray(int bijFunction[CARDINAL_SET], int oldOperationArray[CARDINAL_SET_SQ],
+    void m_computeNewOperationArray(const int bijFunction[CARDINAL_SET], int oldOperationArray[CARDINAL_SET_SQ],
                                     int newOperationArray[CARDINAL_SET_SQ])
     {
         //TODO: Make sure that this is really useless
@@ -54,10 +54,10 @@ private:
          * oldOperationArray is used to compute xy
          * newOperationArray is used to store f(x) * f(y)
          */
-        for (int groupIndex = 0; groupIndex < PROD_FUNCTIONS.NO_PRODUCTS; ++groupIndex)
+        for (int groupIndex = 0; groupIndex < PROD_GROUPS.NO_PRODUCTS; ++groupIndex)
         {
-            int x = PROD_FUNCTIONS.FUNCTIONS[groupIndex][0];
-            int y = PROD_FUNCTIONS.FUNCTIONS[groupIndex][1];
+            int x = PROD_GROUPS.PRODUCTS[groupIndex][0];
+            int y = PROD_GROUPS.PRODUCTS[groupIndex][1];
             int xy = Utils::getElementAtIJ(x,y, oldOperationArray,CARDINAL_SET);
 
             int f_x = bijFunction[x];
@@ -70,8 +70,10 @@ private:
 public:
     Isomorphism() = default;
 
+    static constexpr int MAX_ISOMORPHISMS = BIJ_FUNCTIONS.NO_BIJECTIONS;
+
     void compute_isomorphisms(int operationArray[CARDINAL_SET_SQ],
-                              int isomorphicOperations[BIJ_FUNCTIONS.NO_BIJECTIONS][CARDINAL_SET_SQ], int &rNoIsomorphisms)
+                              int isomorphicOperations[MAX_ISOMORPHISMS][CARDINAL_SET_SQ], int &rNoIsomorphisms)
     {
         int key = m_computeKey(operationArray);
         rNoIsomorphisms = 0;
@@ -81,9 +83,9 @@ public:
 
         //otherwise compute all isomorphisms to that operation
 
-        for (int bijIndex = 0; bijIndex < BIJ_FUNCTIONS.NO_BIJECTIONS; ++bijIndex)
+        for (int bijIndex = 0; bijIndex < MAX_ISOMORPHISMS; ++bijIndex)
         {
-            int *bijFunction = BIJ_FUNCTIONS.FUNCTIONS[bijIndex];
+            const int *bijFunction = BIJ_FUNCTIONS.FUNCTIONS[bijIndex];
             int *newOperation = isomorphicOperations[rNoIsomorphisms];
             m_computeNewOperationArray(bijFunction, operationArray, newOperation);
 
