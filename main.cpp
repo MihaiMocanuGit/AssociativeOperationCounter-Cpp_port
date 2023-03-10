@@ -6,7 +6,7 @@
 
 int main()
 {
-    constexpr int CARDINAL_SET = 5;
+    constexpr int CARDINAL_SET = 4;
 
     Validator<CARDINAL_SET> validator;
 

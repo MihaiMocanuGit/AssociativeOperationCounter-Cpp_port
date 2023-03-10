@@ -26,7 +26,7 @@ public:
         outputFile += std::to_string(CARDINAL_SET);
         outputFile += ".txt";
 
-        m_outputStream.open(outputFile );
+        m_outputStream.open(outputFile,  std::ofstream::out | std::ofstream::trunc);
     }
     
     //void pushToBuffer(const int operationArray[CARDINAL_SET_SQ]);
@@ -48,9 +48,12 @@ public:
             }
             m_outputStream << '\n';
         }
-
+        if (m_totalNoOfPrints % 250 == 0)
+            std::cout << "At " << m_totalNoOfPrints << " associative operations\n";
         m_totalNoOfPrints++;
         m_outputStream << "\t\t\t" << m_totalNoOfPrints << "\n\n";
+
+
 
     }
 
