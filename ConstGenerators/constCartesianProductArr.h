@@ -32,7 +32,7 @@ public:
             {
                 PRODUCTS[functI][i] = PRODUCTS[functI - 1][i];
             }
-            //The same algorithm use in generator.h, generateNext()
+            //The same algorithm use in m_generator.h, generateNext()
             int currentDigit = REPEAT - 1;
             while (currentDigit >= 0 and PRODUCTS[functI][currentDigit] == CARDINAL_SET - 1)
             {
