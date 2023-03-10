@@ -21,15 +21,16 @@ private:
     }
 
 public:
-    int FUNCTIONS[COMPUTE_FACTORIAL()][CARDINAL_SET];
+    static constexpr int NO_BIJECTIONS = COMPUTE_FACTORIAL();
+    int FUNCTIONS[NO_BIJECTIONS][CARDINAL_SET];
 
     constexpr ConstBijectionsArr() : FUNCTIONS()
     {
-        for (int functionIndex = 0; functionIndex < COMPUTE_FACTORIAL(); ++functionIndex)
+        for (int functionIndex = 0; functionIndex < NO_BIJECTIONS; ++functionIndex)
             for (int i = 0; i < CARDINAL_SET; ++i)
                 FUNCTIONS[functionIndex][i] = i;
 
-        for (int functI = 1; functI < COMPUTE_FACTORIAL(); ++functI)
+        for (int functI = 1; functI < NO_BIJECTIONS; ++functI)
         {
             for (int i = 0; i < CARDINAL_SET; ++i)
             {
