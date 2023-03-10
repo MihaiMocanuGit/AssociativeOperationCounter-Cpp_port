@@ -18,7 +18,7 @@ int Utils::getElementAtIJ(int i, int j, int arr[], int numberColumns)
     return arr[i * numberColumns + j];
 }
 
-int Utils::setElementAtIJ(int i, int j, int value, int arr[], int numberColumns)
+void Utils::setElementAtIJ(int i, int j, int value, int arr[], int numberColumns)
 {
     arr[i * numberColumns + j] = value;
 }

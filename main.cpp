@@ -6,7 +6,7 @@
 
 int main()
 {
-    constexpr int CARDINAL_SET = 4;
+    constexpr int CARDINAL_SET = 5;
 
     Validator<CARDINAL_SET> validator;
 
@@ -15,7 +15,7 @@ int main()
     auto timerStop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(timerStop - timerStart);
 
-    std::cout << duration.count() << std::endl;
+    std::cout << duration.count() << "\tmilliseconds" << std::endl;
 
     return 0;
 }
