@@ -12,7 +12,7 @@ template <std::size_t CARDINAL_SET>
 class OperationPrintingBuffer
 {
 private:
-    std::string outputFile = "../output_";
+    std::string outputFile = "output_";
     std::ofstream m_outputStream;
 
     static constexpr int CARDINAL_SET_SQ = CARDINAL_SET * CARDINAL_SET;
