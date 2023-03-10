@@ -17,31 +17,32 @@ private:
     }
 
 public:
-    int PRODUCT_FUNCTIONS[COMPUTE_NO_PRODUCTS()][REPEAT];
+    static consexpr int NO_PRODUCTS = COMPUTE_NO_PRODUCTS();
+    int FUNCTIONS[NO_PRODUCTS][REPEAT];
 
-    constexpr ConstCartesianProductArr() : PRODUCT_FUNCTIONS()
+    constexpr ConstCartesianProductArr() : FUNCTIONS()
     {
-        for (int functionIndex = 0; functionIndex < COMPUTE_NO_PRODUCTS(); ++functionIndex)
+        for (int functionIndex = 0; functionIndex < NO_PRODUCTS; ++functionIndex)
             for (int i = 0; i < REPEAT; ++i)
-                PRODUCT_FUNCTIONS[functionIndex][i] = 0;
+                FUNCTIONS[functionIndex][i] = 0;
 
-        for (int functI = 1; functI < COMPUTE_NO_PRODUCTS(); ++functI)
+        for (int functI = 1; functI < NO_PRODUCTS; ++functI)
         {
             for (int i = 0; i < REPEAT; ++i)
             {
-                PRODUCT_FUNCTIONS[functI][i] = PRODUCT_FUNCTIONS[functI - 1][i];
+                FUNCTIONS[functI][i] = FUNCTIONS[functI - 1][i];
             }
             //The same algorithm use in generator.h, generateNext()
             int currentDigit = REPEAT - 1;
-            while (currentDigit >= 0 and PRODUCT_FUNCTIONS[functI][currentDigit] == CARDINAL_SET - 1)
+            while (currentDigit >= 0 and FUNCTIONS[functI][currentDigit] == CARDINAL_SET - 1)
             {
                 for (int i = currentDigit; i < REPEAT; ++i)
-                    PRODUCT_FUNCTIONS[functI][i] = 0;
+                    FUNCTIONS[functI][i] = 0;
                 currentDigit--;
             }
 
             // we increase the value of the "number" by one
-            PRODUCT_FUNCTIONS[functI][currentDigit]++;
+            FUNCTIONS[functI][currentDigit]++;
 
             // and we move the current_digit pointer back to the end (in the case we actually had to carry at least a one)
             currentDigit = REPEAT - 1;
@@ -58,7 +59,7 @@ public:
             std::cout << functionIndex << '\n';
             for (int i = 0; i < REPEAT; ++i)
             {
-                std::cout << '\t' << PRODUCT_FUNCTIONS[functionIndex][i] << '\t';
+                std::cout << '\t' << FUNCTIONS[functionIndex][i] << '\t';
             }
             std::cout << '\n';
         }

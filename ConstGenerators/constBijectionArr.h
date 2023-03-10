@@ -21,43 +21,43 @@ private:
     }
 
 public:
-    int BIJ_FUNCTIONS[COMPUTE_FACTORIAL()][CARDINAL_SET];
+    int FUNCTIONS[COMPUTE_FACTORIAL()][CARDINAL_SET];
 
-    constexpr ConstBijectionsArr() : BIJ_FUNCTIONS()
+    constexpr ConstBijectionsArr() : FUNCTIONS()
     {
         for (int functionIndex = 0; functionIndex < COMPUTE_FACTORIAL(); ++functionIndex)
             for (int i = 0; i < CARDINAL_SET; ++i)
-                BIJ_FUNCTIONS[functionIndex][i] = i;
+                FUNCTIONS[functionIndex][i] = i;
 
         for (int functI = 1; functI < COMPUTE_FACTORIAL(); ++functI)
         {
             for (int i = 0; i < CARDINAL_SET; ++i)
             {
-                BIJ_FUNCTIONS[functI][i] = BIJ_FUNCTIONS[functI - 1][i];
+                FUNCTIONS[functI][i] = FUNCTIONS[functI - 1][i];
             }
             //https://stackoverflow.com/questions/1622532/algorithm-to-find-next-greater-permutation-of-a-given-string
             //1
             int i = CARDINAL_SET - 1;
-            while (i > 0 and BIJ_FUNCTIONS[functI][i-1] >= BIJ_FUNCTIONS[functI][i])
+            while (i > 0 and FUNCTIONS[functI][i - 1] >= FUNCTIONS[functI][i])
                 i--;
 
             //2
             int j = CARDINAL_SET - 1;
-            while (BIJ_FUNCTIONS[functI][j] <= BIJ_FUNCTIONS[functI][i - 1])
+            while (FUNCTIONS[functI][j] <= FUNCTIONS[functI][i - 1])
                 j--;
 
             //3
-            int temp = BIJ_FUNCTIONS[functI][i - 1];
-            BIJ_FUNCTIONS[functI][i - 1] = BIJ_FUNCTIONS[functI][j];
-            BIJ_FUNCTIONS[functI][j] = temp;
+            int temp = FUNCTIONS[functI][i - 1];
+            FUNCTIONS[functI][i - 1] = FUNCTIONS[functI][j];
+            FUNCTIONS[functI][j] = temp;
 
             //4
             j = CARDINAL_SET - 1;
             while (i < j)
             {
-                temp = BIJ_FUNCTIONS[functI][i];
-                BIJ_FUNCTIONS[functI][i] = BIJ_FUNCTIONS[functI][j];
-                BIJ_FUNCTIONS[functI][j] = temp;
+                temp = FUNCTIONS[functI][i];
+                FUNCTIONS[functI][i] = FUNCTIONS[functI][j];
+                FUNCTIONS[functI][j] = temp;
                 i++;
                 j--;
             }
@@ -74,7 +74,7 @@ public:
             std::cout << functionIndex << '\n';
             for (int i = 0; i < CARDINAL_SET; ++i)
             {
-                std::cout << '\t' << BIJ_FUNCTIONS[functionIndex][i] << '\t';
+                std::cout << '\t' << FUNCTIONS[functionIndex][i] << '\t';
             }
             std::cout << '\n';
         }
