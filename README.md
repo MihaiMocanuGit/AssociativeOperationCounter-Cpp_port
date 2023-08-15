@@ -27,11 +27,11 @@ or `cmake-build-release/`)
 
 # Changing the cardinal of the set
 To modify the cardinal of the set on which you are generating semigroups, please modify in `main.cpp` the line 
-`constexpr int CARDINAL_SET = "Insert New Cardinal";` and recompile the program.
+`constexpr int CARDINAL_SET = <<Insert New Cardinal>>;` and recompile the program.
 
 # Optimisation ideas:
-Similarly to how I computed isomorphism from one semigroup to another. I could do the same to
+Similarly to how I computed isomorphisms from one semigroup to another. I could do the same to
 the other non-associative grupoids. This way I refrain from checking associativity on a structure which is isomorphic to 
 another non-associative structure.
 
-The big downside for this would be heavy RAM/Heap usage/
+The big downside for this would be heavy RAM/Heap usage
