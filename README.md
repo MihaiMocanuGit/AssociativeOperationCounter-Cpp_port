@@ -19,7 +19,7 @@ I'm not sure if I was able to completely fix it. So please keep this in mind in 
 This was only tested on Linux.
 
 # Output files
-The program will create a file `output_'N'.txt` with all generated semigroups. 
+The program will create a file `output_<<N>>.txt` with all generated semigroups. 
 
 The file will be located in the same directory as the executable, usually it will be in the parent directory. 
 ( but, for example, when running the program in CLion, the output files will actually be stored in `cmake-build-debug/`
